@@ -33,40 +33,36 @@ func OpenReader(fileReader io.ReadSeeker) (workbook Workbook, err error) {
 
 // OpenFile - Open document from the file
 func openCfb(adaptor cfb.Cfb) (workbook Workbook, err error) {
+	dir := adaptor.GetDirs()
+	if len(dir) == 0 {
+		return workbook, errors.New("directory not found")
+	}
+
 	var book *cfb.Directory
-	var root *cfb.Directory
-	for _, dir := range adaptor.GetDirs() {
-		fn := dir.Name()
-
-		if fn == "Workbook" {
+	root := dir[0]
+	for _, file := range dir {
+		switch file.Name() {
+		case "Workbook":
 			if book == nil {
-				book = dir
+				book = file
 			}
+		case "Book":
+			book = file
+		case "Root Entry":
+			root = file
 		}
-		if fn == "Book" {
-			book = dir
-
-		}
-		if fn == "Root Entry" {
-			root = dir
-		}
-
+	}
+	if book == nil {
+		return workbook, errors.New("workbook not found")
 	}
 
-	if book != nil {
-		size := binary.LittleEndian.Uint32(book.StreamSize[:])
-
-		reader, err := adaptor.OpenObject(book, root)
-
-		if err != nil {
-			return workbook, err
-		}
-
-		return readStream(reader, size)
-
+	size := binary.LittleEndian.Uint32(book.StreamSize[:])
+	reader, err := adaptor.OpenObject(book, root)
+	if err != nil {
+		return workbook, err
 	}
 
-	return workbook, err
+	return readStream(reader, size)
 }
 
 func readStream(reader io.ReadSeeker, streamSize uint32) (workbook Workbook, err error) {
