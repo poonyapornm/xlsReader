@@ -1,9 +1,10 @@
 package structure
 
 import (
-	"github.com/shakinm/xlsReader/helpers"
 	"math"
 	"strconv"
+
+	"github.com/poonyapornm/xlsReader/helpers"
 )
 
 type RKNum [4]byte
@@ -36,7 +37,7 @@ func (r *RKNum) GetFloat() (fn float64) {
 	if isFloat {
 		fn = f
 	} else {
-		fn=float64(i)
+		fn = float64(i)
 	}
 	return fn
 }

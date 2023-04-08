@@ -1,8 +1,9 @@
 package structure
 
 import (
-	"github.com/shakinm/xlsReader/helpers"
 	"unicode/utf16"
+
+	"github.com/poonyapornm/xlsReader/helpers"
 )
 
 type XLUnicodeRichExtendedString struct {
@@ -36,7 +37,7 @@ type XLUnicodeRichExtendedString struct {
 	ExtRst ExtRst
 }
 
-func (s *XLUnicodeRichExtendedString) Read(stream []byte)   uint32 {
+func (s *XLUnicodeRichExtendedString) Read(stream []byte) uint32 {
 	var rgbSize uint16
 	oft := uint32(0)
 

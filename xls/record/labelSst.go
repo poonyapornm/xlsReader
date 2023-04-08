@@ -1,8 +1,9 @@
 package record
 
 import (
-	"github.com/shakinm/xlsReader/helpers"
 	"reflect"
+
+	"github.com/poonyapornm/xlsReader/helpers"
 )
 
 //LABELSST: Cell Value, String Constant/SST
@@ -57,9 +58,6 @@ func (r *LabelSSt) GetType() string {
 func (r *LabelSSt) GetXFIndex() int {
 	return int(helpers.BytesToUint16(r.ixfe[:]))
 }
-
-
-
 
 func (r *LabelSSt) Read(stream []byte, sst *SST) {
 	r.sst = sst

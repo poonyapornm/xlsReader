@@ -1,9 +1,10 @@
 package record
 
 import (
-	"github.com/shakinm/xlsReader/helpers"
-	"github.com/shakinm/xlsReader/xls/structure"
 	"io"
+
+	"github.com/poonyapornm/xlsReader/helpers"
+	"github.com/poonyapornm/xlsReader/xls/structure"
 )
 
 // SST: Shared String Table
@@ -55,7 +56,7 @@ func abs(x int) int {
 	return x
 }
 
-func (s *SST) Read(readType string, grbit byte, prevLen int32) () {
+func (s *SST) Read(readType string, grbit byte, prevLen int32) {
 
 	defer r()
 

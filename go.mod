@@ -1,4 +1,4 @@
-module github.com/shakinm/xlsReader
+module github.com/poonyapornm/xlsReader
 
 require (
 	github.com/metakeule/fmtdate v1.1.2

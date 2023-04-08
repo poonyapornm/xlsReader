@@ -2,8 +2,10 @@ package xls
 
 import (
 	"encoding/binary"
-	"github.com/shakinm/xlsReader/cfb"
+	"errors"
 	"io"
+
+	"github.com/poonyapornm/xlsReader/cfb"
 )
 
 // OpenFile - Open document from the file
